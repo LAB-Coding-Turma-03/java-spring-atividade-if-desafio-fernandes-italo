@@ -52,7 +52,40 @@ public class SimularValoresController {
 		 */
 		
 		
-		return ResponseEntity.ok("Hello world !");
+		return ResponseEntity.ok(getDescricaoProduto(codigoProduto) + " sendo pago " + getDescricaoPagamento(codTipoPagamento)
+								+" custará " + getValorComDesconto(codTipoPagamento, getValorProduto(codigoProduto)) +" reais");
 	}
-	
+
+	private String getDescricaoProduto(Integer codigoProduto){
+		if (codigoProduto == 1) return "Camisa";
+		if (codigoProduto == 2) return "Shorts";
+		if (codigoProduto == 3) return "Meia";	
+		if (codigoProduto == 4) return "Toca";
+		if (codigoProduto == 5) return "Luvas";
+		return "###";
+	}
+	private Double getValorProduto(Integer codigoProduto){
+		if (codigoProduto == 1) return 70.00;
+		if (codigoProduto == 2) return 57.50;
+		if (codigoProduto == 3) return 9.99;	
+		if (codigoProduto == 4) return 35.00;
+		if (codigoProduto == 5) return 19.50;
+		return 0.00;
+	}
+
+	private String getDescricaoPagamento(Integer codTipoPagamento){
+		if (codTipoPagamento == 1) return "A vista no dinheiro com 10% de desconto";
+		if (codTipoPagamento == 2) return "A vista no cartão de crédito  com 5% de desconto";
+		if (codTipoPagamento == 3) return "Em duas parcelas sem nenhum desconto";	
+		if (codTipoPagamento == 4) return "Em três vezes com 10% de juros";
+		return "###";
+	}
+
+	private Double getValorComDesconto(Integer codTipoPagamento, Double valor){
+		if (codTipoPagamento == 1) return valor * 0.90;
+		if (codTipoPagamento == 2) return valor * 0.95;
+		if (codTipoPagamento == 3) return valor;
+		if (codTipoPagamento == 4) return valor * 1.10;
+		return 0.00;
+	}	
 }
